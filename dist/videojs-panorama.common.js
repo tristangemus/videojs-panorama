@@ -72,8 +72,8 @@ var Detector = {
             var currentVideoSource = videoSources[i];
             if ((currentVideoSource.type === "application/x-mpegURL" || currentVideoSource.type === "application/vnd.apple.mpegurl") && /(Safari|AppleWebKit)/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor)) {
                 result = true;
+                break;
             }
-            break;
         }
         return result;
     },
@@ -1125,7 +1125,7 @@ function dispatchEventAsync(element, type) {
 }
 
 // iOS 10 adds support for native inline playback + silent autoplay
-var isWhitelisted = /iPhone|iPod/i.test(navigator.userAgent) && !matchMedia('(-webkit-video-playable-inline)').matches;
+var isWhitelisted = 'object-fit' in document.head.style && /iPhone|iPod/i.test(navigator.userAgent) && !matchMedia('(-webkit-video-playable-inline)').matches;
 
 var ಠ = index$1();
 var ಠevent = index$1();
@@ -1543,6 +1543,17 @@ var onPlayerReady = function onPlayerReady(player, options, settings) {
         player.removeClass("vjs-using-native-controls");
         canvas.playOnMobile();
     }
+
+    var cardboard = player.addChild('CardboardMessage', options);
+
+    window.addEventListener('devicemotion', cardboard.maybeDisplay.bind(cardboard, canvas));
+    player.on('VRModeOn', cardboard.maybeDisplay.bind(cardboard, canvas));
+    player.on('VRModeOff', cardboard.maybeDisplay.bind(cardboard, canvas));
+
+    var orientationIcon = player.addChild('OrientationIcon', options);
+    orientationIcon.initEvents(canvas);
+    // window.addEventListener('devicemotion', orientationIcon.update.bind(orientationIcon, canvas));
+
     if (options.showNotice) {
         player.on("playing", function () {
             PopupNotification(player, util.deepCopy(options));

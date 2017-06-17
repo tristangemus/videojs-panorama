@@ -48,6 +48,26 @@
     height: auto;
     background: #000;
     cursor: pointer; }
+  .video-js.vjs-panorama .vjs-video-notice-cardboard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/assets/request-cardboard.png);
+    background-size: cover;
+    display: none; }
+    .video-js.vjs-panorama .vjs-video-notice-cardboard.active {
+      display: block; }
+  .video-js.vjs-panorama .vjs-video-orientation-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    background-image: url(/assets/VR_Icon_VIEW.png);
+    background-size: 32px; }
   .video-js.vjs-panorama .vjs-video-notice-label {
     position: absolute;
     top: 50%;

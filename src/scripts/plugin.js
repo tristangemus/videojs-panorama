@@ -145,6 +145,17 @@ const onPlayerReady = (player, options, settings) => {
         player.removeClass("vjs-using-native-controls");
         canvas.playOnMobile();
     }
+
+    var cardboard = player.addChild('CardboardMessage', options);
+
+    window.addEventListener('devicemotion', cardboard.maybeDisplay.bind(cardboard, canvas));
+    player.on('VRModeOn', cardboard.maybeDisplay.bind(cardboard, canvas));
+    player.on('VRModeOff', cardboard.maybeDisplay.bind(cardboard, canvas));
+
+    var orientationIcon = player.addChild('OrientationIcon', options);
+    orientationIcon.initEvents(canvas);
+    // window.addEventListener('devicemotion', orientationIcon.update.bind(orientationIcon, canvas));
+
     if(options.showNotice){
         player.on("playing", function(){
             PopupNotification(player, util.deepCopy(options));
