@@ -47,7 +47,7 @@ var OrientationIcon = function(baseComponent){
         },
 
         update: function (canvas, object) {
-            var degrees = getOrientationDegrees(canvas);
+            var degrees = getOrientationDegrees(canvas) + 90;
             this.el().style.transform = 'rotate(' + degrees + 'deg)';
         },
 

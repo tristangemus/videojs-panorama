@@ -64,6 +64,25 @@
       cursor: pointer;
     }
 
+    .vjs-big-play-button {
+      top: 50%;
+      left: 0;
+      right: 0;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin: 0 auto;
+      -moz-transition: none;
+      -o-transition: none;
+      transition: none;
+      height: 3em;
+      border-radius: 50%;
+
+      &:before {
+        line-height: 2em;
+        font-size: 1.5em;
+      }
+    }
+
     .vjs-video-notice-cardboard {
       position: absolute;
       top: 0;
@@ -88,6 +107,7 @@
       height: 32px;
       background-image: url(/assets/VR_Icon_VIEW.png);
       background-size: 32px;
+      display: none;
     }
 
     .vjs-video-notice-label{
@@ -173,5 +193,17 @@
       border-top-color: white;
       -webkit-animation-delay: 0.44s;
       animation-delay: 0.44s; }
+  }
+
+  &.vjs-has-started {
+    .vjs-video-orientation-icon {
+      display: block;
+    }
+  }
+
+  &.vjs-ended {
+    .vjs-video-orientation-icon {
+      display: none;
+    }
   }
 }
